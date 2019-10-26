@@ -12,14 +12,14 @@ namespace Network
             PubSubClient client;
         public:
             MQTTClient(Wireless network) : client(PubSubClient(network.getClient())) {}
-            bool connect(const char* host, uint16_t port, uint8_t maxTries, uint16_t delayMs)
+            bool connect(const char* host, uint16_t port, const char* user, const char* password, uint8_t maxTries, uint16_t delayMs)
             {
                 client.setServer(host, port);
                 uint8_t tries = 0;
                 while(!client.connected() && tries < maxTries)
                 {
                     Log.notice(F("Connecting to MQTT broker"));
-                    if(client.connect("AirQualitySensor"))
+                    if(client.connect("esp1", user, password))
                     {
                         Log.notice(F("Connected to MQTT broker"));
                     }

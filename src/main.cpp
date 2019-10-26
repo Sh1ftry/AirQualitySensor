@@ -9,10 +9,12 @@
 const uint8_t SW_RX=12, SW_TX=13, TH_PIN=14;
 const uint16_t BAUD_RATE=9600;
 
-const char* WIFI_SSID = "OnePlus 6T";
+const char* WIFI_SSID = "";
 const char* WIFI_PASSWORD = "";
-const char* MQTT_HOST = "broker.hivemq.com";
-const uint16_t MQTT_PORT = 1883;
+const char* MQTT_HOST = "farmer.cloudmqtt.com";
+const uint16_t MQTT_PORT = 15304;
+const char* MQTT_USER = "";
+const char* MQTT_PASSWORD = "";
 const char* MQTT_TOPIC = "sensors/air_quality_sensor";
 const char* MQTT_TEMP_TOPIC = "sensors/temperature";
 const char* MQTT_HUM_TOPIC = "sensors/humidity";
@@ -31,7 +33,7 @@ void setup()
   Log.setSuffix([](Print* _logOutput){_logOutput->print('\n');});
   
   wifi.connect(WIFI_SSID, WIFI_PASSWORD, 30, 1000);
-  mqttClient.connect(MQTT_HOST, MQTT_PORT, 10, 1000);
+  mqttClient.connect(MQTT_HOST, MQTT_PORT, MQTT_USER, MQTT_PASSWORD, 10, 1000);
 
   thSensor.init();
   aqSensor.init();
