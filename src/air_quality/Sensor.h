@@ -1,7 +1,8 @@
 #ifndef AIR_QUALITY_SENSOR_H
 #define AIR_QUALITY_SENSOR_H
-#include <PMserial.h>
 #include <ArduinoLog.h>
+#include <SoftwareSerial.h>
+#include <PMS.h>
 #include "Measurement.h"
 
 namespace AirQuality
@@ -9,28 +10,29 @@ namespace AirQuality
     class Sensor
     {
         public:
-            Sensor(const int rx, const int tx) : pms(PMS5003, rx, tx) {}
+            Sensor(const int rx, const int tx) : softwareSerial(rx, tx), pms(softwareSerial) {}
             void init()
             {
                 Log.notice(F("Initializing sensor"));
-                pms.init();
+                softwareSerial.begin(9600);
             }
 
             Measurement read()
             {
-                pms.read();
-                if(pms)
+                if(pms.readUntil(reading))
                 {
-                    return Measurement(true, pms.pm01, pms.pm25, pms.pm10);
+                    return Measurement(true, reading.PM_SP_UG_1_0, reading.PM_SP_UG_2_5, reading.PM_SP_UG_10_0);
                 }
                 else
                 {
-                    return Measurement(false, 0, 0, 0);
+                    return Measurement(false, -1, -1, -1);
                 }
             }    
 
         private:
-            SerialPM pms;
+            SoftwareSerial softwareSerial;
+            PMS pms;
+            PMS::DATA reading;
     };
 }
 

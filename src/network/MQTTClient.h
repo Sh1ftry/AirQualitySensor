@@ -2,6 +2,7 @@
 #define NETWORK_MQTT_H
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
+#include <cfloat>
 
 namespace Network
 {
@@ -33,6 +34,13 @@ namespace Network
 
             void publish(const char* topic, const char* payload, boolean retained = false)
             {
+                client.publish(topic, payload, retained);
+            }
+
+            void publish(const char* topic, float fPayload, boolean retained = false)
+            {
+                char payload[10];
+                dtostrf(fPayload, 6, 2, payload);
                 client.publish(topic, payload, retained);
             }
 
