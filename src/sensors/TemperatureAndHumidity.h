@@ -7,7 +7,7 @@
 #include <ArduinoLog.h>
 
 namespace Sensors {
-    class TempHum {
+    class TemperatureAndHumidity {
         private:
             DHT dht;
         public:
@@ -19,23 +19,23 @@ namespace Sensors {
                     const float humidity;
             };
             
-            TempHum(uint8_t pin): dht(pin, DHT22) {}
+            TemperatureAndHumidity(uint8_t pin): dht(pin, DHT22) {}
             
-            void begin()
+            void init()
             {
                 Log.notice(F("Initializing DHT sensor"));
                 dht.begin();
             }
 
-            Sensors::TempHum::Measurement read()
+            Sensors::TemperatureAndHumidity::Measurement read()
             {
                 Log.notice(F("Reading DHT sensor"));
                 float h = dht.readHumidity();
                 float t = dht.readTemperature();
                 if (isnan(h) || isnan(t)) {
-                    return Sensors::TempHum::Measurement(-1., -1.);
+                    return Sensors::TemperatureAndHumidity::Measurement(-1., -1.);
                 }
-                return Sensors::TempHum::Measurement(t, h);
+                return Sensors::TemperatureAndHumidity::Measurement(t, h);
             }
     };
 }

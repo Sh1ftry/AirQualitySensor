@@ -39,9 +39,7 @@ namespace Network
 
             void publish(const char* topic, float fPayload, boolean retained = false)
             {
-                char payload[10];
-                dtostrf(fPayload, 6, 2, payload);
-                client.publish(topic, payload, retained);
+                client.publish(topic, String(fPayload).c_str(), retained);
             }
 
             void loop()
