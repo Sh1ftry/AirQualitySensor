@@ -17,7 +17,7 @@ namespace Network
                 
                 while(WiFi.status() != WL_CONNECTED && tries < maxTries)
                 {
-                    Log.notice(F("Connecting to network..."));
+                    Log.notice(F("Connecting to %s..."), ssid.c_str());
                     delay(delayMs);
                     tries++;
                 }

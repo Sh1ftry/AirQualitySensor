@@ -9,12 +9,8 @@
 const uint8_t SW_RX=12, SW_TX=13, TH_PIN=14;
 const uint16_t BAUD_RATE=9600;
 
-const char* WIFI_SSID = "";
-const char* WIFI_PASSWORD = "";
 const char* MQTT_HOST = "farmer.cloudmqtt.com";
 const uint16_t MQTT_PORT = 15304;
-const char* MQTT_USER = "";
-const char* MQTT_PASSWORD = "";
 const char* MQTT_TOPIC = "sensors/air_quality_sensor";
 const char* MQTT_TEMP_TOPIC = "sensors/temperature";
 const char* MQTT_HUM_TOPIC = "sensors/humidity";
