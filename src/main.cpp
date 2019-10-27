@@ -41,7 +41,8 @@ void loop()
 
   auto thMeasurement = thSensor.read();
   auto aqMeasurement = aqSensor.read(); 
-  mqttClient.publish(MQTT_TOPIC, aqMeasurement.toJson().c_str(), true);
+  if(aqMeasurement.pm01 != -1)
+    mqttClient.publish(MQTT_TOPIC, aqMeasurement.toJson().c_str(), true);
   mqttClient.publish(MQTT_HUM_TOPIC, thMeasurement.humidity, true);
   mqttClient.publish(MQTT_TEMP_TOPIC, thMeasurement.temperature, true);
 }
