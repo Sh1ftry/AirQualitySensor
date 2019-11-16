@@ -52,14 +52,18 @@ void setup()
   }
 }
 
+struct {
+  byte address;
+  byte type;
+  float data;
+} packet;
+
 void loop()
 {
-  if(radio.available())
-  {
-    Log.verbose(F("Radio available"));
-    char data[32];
-    radio.read(data, sizeof(data));
-    data[31] = '\0'; 
-    Log.verbose("%s", data);
+  if(radio.available()) {
+    radio.read(&packet, sizeof(packet));
+    Log.verbose("%d", packet.address);
+    Log.verbose("%d", packet.type);
+    Log.verbose("%F", packet.data);
   }
 }
