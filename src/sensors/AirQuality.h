@@ -40,7 +40,7 @@ namespace Sensors
                 }
                 else
                 {
-                    return Sensors::AirQuality::Measurement(false, -1, -1, -1);
+                    return Sensors::AirQuality::Measurement(false, 0, 0, 0);
                 }
             }    
 
