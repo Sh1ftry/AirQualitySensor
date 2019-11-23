@@ -8,8 +8,8 @@ const uint8_t SW_RX=2, SW_TX=3;
 const uint16_t BAUD_RATE=9600;
 
 const uint64_t address = 0xABCDABCD71LL;
-Sensors::AirQuality aqSensor(2, 3);
-RF24 radio(9, 10);
+Sensors::AirQuality aqSensor(A0, A1);
+RF24 radio(10, 9);
 
 void setup()
 {
