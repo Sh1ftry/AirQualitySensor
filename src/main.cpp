@@ -3,6 +3,9 @@
 #include <SoftwareSerial.h>
 #include <RF24.h>
 #include "sensors/AirQuality.h"
+#include "AirQualitySensor/AitQualitySensor.h"
+#include "Configuration.h"
+#include "Sensor.h"
 
 const uint8_t SW_RX=2, SW_TX=3;
 const uint16_t BAUD_RATE=9600;
